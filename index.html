@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sabores Leves — Página de Vendas</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green-dark: #2D5A27;
+    --green-med: #4A8B3F;
+    --green-light: #7BBD72;
+    --green-pale: #D6EDD3;
+    --cream: #FAFAF5;
+    --gold: #C8A84B;
+    --gold-light: #F0D98C;
+    --dark: #1C2B1A;
+    --orange: #E07B39;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--dark);
+    line-height: 1.7;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(160deg, #0d2b0a 0%, #1a4a14 50%, #0d2b0a 100%);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 60px 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 30% 40%, rgba(74,139,63,0.25) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 70%, rgba(200,168,75,0.15) 0%, transparent 50%);
+  }
+  .hero-badge {
+    background: var(--gold);
+    color: var(--green-dark);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    padding: 8px 20px;
+    border-radius: 30px;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    position: relative;
+    animation: fadeDown 0.7s ease both;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(52px, 10vw, 96px);
+    font-weight: 900;
+    color: white;
+    line-height: 1.0;
+    position: relative;
+    animation: fadeDown 0.8s 0.1s ease both;
+  }
+  .hero h1 span {
+    color: var(--green-light);
+    display: block;
+  }
+  .hero-sub {
+    font-size: clamp(16px, 2.5vw, 21px);
+    color: rgba(255,255,255,0.75);
+    max-width: 580px;
+    margin: 24px auto 40px;
+    position: relative;
+    animation: fadeDown 0.8s 0.2s ease both;
+  }
+  .hero-stats {
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 48px;
+    position: relative;
+    animation: fadeDown 0.8s 0.3s ease both;
+  }
+  .hero-stat {
+    text-align: center;
+  }
+  .hero-stat strong {
+    display: block;
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    color: var(--gold);
+    line-height: 1;
+  }
+  .hero-stat span {
+    font-size: 12px;
+    color: rgba(255,255,255,0.6);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .hero-divider {
+    width: 80px; height: 2px;
+    background: var(--gold);
+    margin: 0 auto 48px;
+    position: relative;
+    animation: fadeDown 0.8s 0.35s ease both;
+  }
+  .cta-btn {
+    background: linear-gradient(135deg, var(--gold) 0%, #e8c060 100%);
+    color: var(--green-dark);
+    font-weight: 700;
+    font-size: 18px;
+    padding: 20px 52px;
+    border: none;
+    border-radius: 60px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    position: relative;
+    box-shadow: 0 8px 40px rgba(200,168,75,0.4);
+    transition: transform 0.2s, box-shadow 0.2s;
+    animation: fadeDown 0.8s 0.4s ease both;
+  }
+  .cta-btn:hover { transform: translateY(-3px); box-shadow: 0 14px 50px rgba(200,168,75,0.5); }
+  .cta-sub { color: rgba(255,255,255,0.5); font-size: 13px; margin-top: 14px; animation: fadeDown 0.8s 0.5s ease both; position: relative; }
+
+  /* ── SECTIONS ── */
+  section { padding: 80px 24px; }
+  .container { max-width: 860px; margin: 0 auto; }
+  .section-label {
+    font-size: 11px; font-weight: 700; letter-spacing: 3px;
+    text-transform: uppercase; color: var(--gold);
+    margin-bottom: 12px; display: block;
+  }
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 5vw, 42px);
+    font-weight: 700;
+    color: var(--green-dark);
+    line-height: 1.2;
+    margin-bottom: 20px;
+  }
+  .lead { font-size: 17px; color: #3D5C38; margin-bottom: 32px; max-width: 640px; }
+
+  /* ── PAIN SECTION ── */
+  .pain { background: white; }
+  .pain-list { list-style: none; display: grid; gap: 16px; margin-top: 32px; }
+  .pain-list li {
+    display: flex; align-items: flex-start; gap: 16px;
+    padding: 20px; border-radius: 12px;
+    background: var(--cream); border-left: 4px solid var(--orange);
+  }
+  .pain-list li .icon { font-size: 22px; flex-shrink: 0; margin-top: 2px; }
+  .pain-list li p { font-size: 15px; color: #444; }
+
+  /* ── SOLUTION ── */
+  .solution { background: var(--green-dark); }
+  .solution h2 { color: white; }
+  .solution .lead { color: var(--green-pale); }
+  .solution-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px; margin-top: 40px;
+  }
+  .solution-card {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 16px;
+    padding: 28px 24px;
+    transition: background 0.2s;
+  }
+  .solution-card:hover { background: rgba(255,255,255,0.13); }
+  .solution-card .ico { font-size: 32px; margin-bottom: 14px; display: block; }
+  .solution-card h3 { color: var(--gold); font-size: 16px; font-weight: 600; margin-bottom: 8px; }
+  .solution-card p { color: rgba(255,255,255,0.7); font-size: 14px; line-height: 1.6; }
+
+  /* ── WHAT'S INSIDE ── */
+  .inside { background: var(--cream); }
+  .chapters { display: grid; gap: 16px; margin-top: 32px; }
+  .chapter-row {
+    display: flex; align-items: center; gap: 20px;
+    padding: 20px 24px; border-radius: 14px;
+    background: white; border: 1px solid var(--green-pale);
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .chapter-row:hover { border-color: var(--green-light); transform: translateX(6px); }
+  .chapter-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px; font-weight: 900;
+    color: var(--green-pale);
+    min-width: 40px;
+  }
+  .chapter-info h3 { font-size: 15px; font-weight: 600; color: var(--green-dark); }
+  .chapter-info p { font-size: 13px; color: #6B8C65; margin-top: 2px; }
+  .chapter-tag {
+    margin-left: auto; background: var(--green-pale);
+    color: var(--green-dark); font-size: 11px; font-weight: 600;
+    padding: 4px 10px; border-radius: 20px; white-space: nowrap;
+  }
+
+  /* ── FOR WHO ── */
+  .forwho { background: white; }
+  .forwho-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px; margin-top: 32px;
+  }
+  .forwho-card {
+    padding: 28px 22px; border-radius: 16px;
+    background: var(--green-pale);
+    border-bottom: 4px solid var(--green-med);
+  }
+  .forwho-card .ico { font-size: 30px; margin-bottom: 12px; display: block; }
+  .forwho-card p { font-size: 14px; color: var(--green-dark); line-height: 1.6; }
+
+  /* ── TESTIMONIALS ── */
+  .testimonials { background: var(--cream); }
+  .testi-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px; margin-top: 40px;
+  }
+  .testi-card {
+    background: white; border-radius: 18px;
+    padding: 28px; position: relative;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+  }
+  .testi-card::before {
+    content: '"';
+    font-family: 'Playfair Display', serif;
+    font-size: 80px; line-height: 1;
+    color: var(--green-pale);
+    position: absolute; top: 10px; left: 20px;
+  }
+  .testi-card p { font-size: 14px; color: #444; line-height: 1.7; padding-top: 28px; }
+  .testi-author { margin-top: 20px; display: flex; align-items: center; gap: 12px; }
+  .testi-avatar {
+    width: 42px; height: 42px; border-radius: 50%;
+    background: var(--green-pale);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+  }
+  .testi-name { font-weight: 600; font-size: 14px; color: var(--green-dark); }
+  .testi-role { font-size: 12px; color: #999; }
+  .stars { color: var(--gold); font-size: 13px; margin-bottom: 4px; }
+
+  /* ── PRICING ── */
+  .pricing { background: var(--green-dark); text-align: center; }
+  .pricing h2 { color: white; }
+  .pricing .lead { color: var(--green-pale); margin: 0 auto 48px; }
+  .price-card {
+    background: white;
+    border-radius: 24px;
+    padding: 48px 40px;
+    max-width: 440px;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+  }
+  .price-card::before {
+    content: '⭐ MAIS VENDIDO';
+    position: absolute; top: 20px; right: -30px;
+    background: var(--gold); color: var(--green-dark);
+    font-size: 10px; font-weight: 800; letter-spacing: 2px;
+    padding: 6px 50px; transform: rotate(45deg);
+  }
+  .price-original { color: #999; font-size: 16px; text-decoration: line-through; margin-bottom: 4px; }
+  .price-value {
+    font-family: 'Playfair Display', serif;
+    font-size: 72px; font-weight: 900;
+    color: var(--green-dark); line-height: 1;
+  }
+  .price-value sup { font-size: 28px; vertical-align: super; }
+  .price-value span { font-size: 24px; }
+  .price-desc { color: #666; font-size: 14px; margin: 12px 0 32px; }
+  .price-includes { list-style: none; text-align: left; margin-bottom: 36px; display: grid; gap: 12px; }
+  .price-includes li { display: flex; align-items: center; gap: 10px; font-size: 15px; color: var(--dark); }
+  .price-includes li::before { content: '✅'; font-size: 16px; }
+  .price-card .cta-btn { width: 100%; text-align: center; font-size: 17px; }
+  .price-guarantee { margin-top: 20px; font-size: 13px; color: #888; }
+
+  /* ── FAQ ── */
+  .faq { background: white; }
+  .faq-list { display: grid; gap: 16px; margin-top: 32px; max-width: 700px; }
+  .faq-item {
+    border: 1px solid var(--green-pale);
+    border-radius: 12px; overflow: hidden;
+  }
+  .faq-q {
+    padding: 18px 22px;
+    font-weight: 600; font-size: 15px; color: var(--green-dark);
+    background: var(--cream); cursor: pointer;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .faq-q::after { content: '+'; font-size: 22px; color: var(--gold); }
+  .faq-a { padding: 16px 22px; font-size: 14px; color: #555; line-height: 1.7; background: white; }
+
+  /* ── COPY SECTION ── */
+  .copy-section { background: #1a1a1a; padding: 80px 24px; }
+  .copy-section h2 { color: white; font-family: 'Playfair Display', serif; margin-bottom: 40px; }
+  .copy-box {
+    background: #2a2a2a; border: 1px solid #444; border-radius: 14px;
+    padding: 32px; margin-bottom: 28px; position: relative;
+  }
+  .copy-box h3 { color: var(--gold); font-size: 13px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 16px; }
+  .copy-box p, .copy-box li { color: #ccc; font-size: 14px; line-height: 1.8; }
+  .copy-box ul { padding-left: 20px; }
+  .copy-tag {
+    position: absolute; top: 16px; right: 16px;
+    background: var(--green-dark); color: var(--gold);
+    font-size: 10px; font-weight: 700; letter-spacing: 2px;
+    padding: 4px 10px; border-radius: 20px;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #0d1a0b; padding: 40px 24px; text-align: center;
+    color: rgba(255,255,255,0.4); font-size: 13px;
+  }
+  footer strong { color: var(--gold); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 600px) {
+    .hero-stats { gap: 24px; }
+    .price-card { padding: 36px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">🌿 Novo E-book de Nutrição</div>
+  <h1>Sabores<span>Leves</span></h1>
+  <p class="hero-sub">O guia completo para emagrecer com saúde, comer bem todos os dias e transformar sua relação com a comida — de vez.</p>
+  <div class="hero-stats">
+    <div class="hero-stat"><strong>50+</strong><span>Receitas</span></div>
+    <div class="hero-stat"><strong>36</strong><span>Páginas</span></div>
+    <div class="hero-stat"><strong>8</strong><span>Capítulos</span></div>
+    <div class="hero-stat"><strong>7</strong><span>Dias de Plano</span></div>
+  </div>
+  <div class="hero-divider"></div>
+  <a href="#pricing" class="cta-btn">🛒 Quero meu exemplar agora</a>
+  <p class="cta-sub">Acesso imediato após o pagamento · PDF digital</p>
+</section>
+
+<!-- DOR -->
+<section class="pain">
+  <div class="container">
+    <span class="section-label">Você se identifica?</span>
+    <h2>Você já tentou de tudo e ainda não consegue manter uma alimentação saudável?</h2>
+    <p class="lead">Se você respondeu sim, saiba que não é falta de força de vontade. É falta do método certo.</p>
+    <ul class="pain-list">
+      <li><span class="icon">😩</span><p><strong>Começa bem na segunda, mas desiste na quinta</strong> — a rotina corrida vence e você volta para o ultraprocessado.</p></li>
+      <li><span class="icon">😕</span><p><strong>Não sabe o que comer em cada refeição</strong> — fica improvisando e no fim acaba comendo qualquer coisa.</p></li>
+      <li><span class="icon">😤</span><p><strong>Sente culpa quando come um doce</strong> — e isso gera mais compulsão. Um ciclo que nunca termina.</p></li>
+      <li><span class="icon">😴</span><p><strong>Fica sem energia o dia todo</strong> — porque a alimentação não está suprindo os nutrientes que seu corpo precisa.</p></li>
+      <li><span class="icon">🤯</span><p><strong>Informação demais e confusa</strong> — um diz que carboidrato é vilão, outro diz que é essencial. Você não sabe em quem acreditar.</p></li>
+    </ul>
+  </div>
+</section>
+
+<!-- SOLUÇÃO -->
+<section class="solution">
+  <div class="container">
+    <span class="section-label" style="color:var(--gold-light)">A solução que você precisava</span>
+    <h2>Sabores Leves foi criado para quem quer resultado real — sem dietas malucas</h2>
+    <p class="lead">Um guia prático, bonito e completo que você vai querer consultar todo dia.</p>
+    <div class="solution-grid">
+      <div class="solution-card"><span class="ico">🍽️</span><h3>50+ Receitas Testadas</h3><p>Café da manhã, almoço, jantar, lanches e sobremesas com calorias e valor nutricional.</p></div>
+      <div class="solution-card"><span class="ico">📅</span><h3>Plano de 7 Dias Completo</h3><p>Cardápio pronto para a semana inteira + lista de compras organizada por categoria.</p></div>
+      <div class="solution-card"><span class="ico">🧬</span><h3>Guia de Nutrição</h3><p>Tabelas de macros, vitaminas, minerais e superalimentos explicados de forma simples.</p></div>
+      <div class="solution-card"><span class="ico">🔄</span><h3>Substituições Inteligentes</h3><p>Troque os vilões da dieta por opções saudáveis sem perder sabor nem praticidade.</p></div>
+      <div class="solution-card"><span class="ico">🍹</span><h3>Bebidas Funcionais</h3><p>Águas detox, golden milk, sucos verdes e guia completo de chás medicinais.</p></div>
+      <div class="solution-card"><span class="ico">🧮</span><h3>Calcule Suas Calorias</h3><p>Fórmula completa para descobrir exatamente quantas calorias você precisa por dia.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- O QUE TEM DENTRO -->
+<section class="inside">
+  <div class="container">
+    <span class="section-label">Conteúdo completo</span>
+    <h2>O que você vai encontrar dentro do e-book</h2>
+    <p class="lead">8 capítulos + 2 bônus exclusivos, tudo organizado para você aplicar imediatamente.</p>
+    <div class="chapters">
+      <div class="chapter-row"><span class="chapter-num">1</span><div class="chapter-info"><h3>Despertar Saudável</h3><p>5 receitas de café da manhã nutritivas e rápidas + tabela nutricional comparativa</p></div><span class="chapter-tag">5 receitas</span></div>
+      <div class="chapter-row"><span class="chapter-num">2</span><div class="chapter-info"><h3>Almoços Energizantes</h3><p>5 pratos completos ricos em fibras e proteínas para manter a energia até o jantar</p></div><span class="chapter-tag">5 receitas</span></div>
+      <div class="chapter-row"><span class="chapter-num">3</span><div class="chapter-info"><h3>Jantares Leves</h3><p>3 receitas noturnas que saciam sem pesar e favorecem a qualidade do sono</p></div><span class="chapter-tag">3 receitas</span></div>
+      <div class="chapter-row"><span class="chapter-num">4</span><div class="chapter-info"><h3>Lanches Inteligentes</h3><p>8 opções práticas com calorias para nunca mais improvisar entre as refeições</p></div><span class="chapter-tag">8 opções</span></div>
+      <div class="chapter-row"><span class="chapter-num">5</span><div class="chapter-info"><h3>Doces Sem Culpa</h3><p>5 sobremesas 100% naturais — do sorvete de banana ao mousse de chocolate</p></div><span class="chapter-tag">5 receitas</span></div>
+      <div class="chapter-row"><span class="chapter-num">6</span><div class="chapter-info"><h3>Guia Completo de Nutrição</h3><p>Macros, vitaminas, minerais, superalimentos e alimentos para evitar — tudo em tabelas</p></div><span class="chapter-tag">tabelas</span></div>
+      <div class="chapter-row"><span class="chapter-num">7</span><div class="chapter-info"><h3>Plano Alimentar de 7 Dias</h3><p>Cardápio completo + lista de compras semanal + guia de meal prep</p></div><span class="chapter-tag">plano</span></div>
+      <div class="chapter-row"><span class="chapter-num">8</span><div class="chapter-info"><h3>Estilo de Vida Saudável</h3><p>Exercício, sono, mindful eating e como calcular suas calorias ideais</p></div><span class="chapter-tag">guia</span></div>
+      <div class="chapter-row" style="border-left:4px solid var(--gold);"><span class="chapter-num" style="color:var(--gold)">+</span><div class="chapter-info"><h3>🎁 Bônus 1 — Bebidas Funcionais</h3><p>4 receitas de bebidas detox + guia de chás medicinais com indicações</p></div><span class="chapter-tag" style="background:var(--gold-light)">bônus</span></div>
+      <div class="chapter-row" style="border-left:4px solid var(--gold);"><span class="chapter-num" style="color:var(--gold)">+</span><div class="chapter-info"><h3>🎁 Bônus 2 — Substituições Inteligentes</h3><p>12+ substituições saudáveis para transformar qualquer receita sem perder o sabor</p></div><span class="chapter-tag" style="background:var(--gold-light)">bônus</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- PARA QUEM -->
+<section class="forwho">
+  <div class="container">
+    <span class="section-label">Para quem é este e-book?</span>
+    <h2>Sabores Leves é para você se...</h2>
+    <div class="forwho-grid">
+      <div class="forwho-card"><span class="ico">🙋‍♀️</span><p>Quer <strong>emagrecer de forma saudável</strong> sem passar fome ou abrir mão do prazer de comer</p></div>
+      <div class="forwho-card"><span class="ico">⏰</span><p>Tem <strong>pouco tempo</strong> e precisa de receitas rápidas e práticas para o dia a dia corrido</p></div>
+      <div class="forwho-card"><span class="ico">🔰</span><p>É <strong>iniciante na cozinha saudável</strong> e quer aprender de forma simples e sem complicação</p></div>
+      <div class="forwho-card"><span class="ico">💪</span><p>Quer <strong>ganhar disposição e energia</strong> para trabalhar, treinar e aproveitar melhor o dia</p></div>
+      <div class="forwho-card"><span class="ico">🧠</span><p>Busca <strong>entender de nutrição</strong> para fazer escolhas conscientes sem depender de dietas</p></div>
+      <div class="forwho-card"><span class="ico">👨‍👩‍👧</span><p>Quer levar <strong>alimentação saudável para a família</strong> com receitas que todos vão adorar</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- DEPOIMENTOS (modelo) -->
+<section class="testimonials">
+  <div class="container">
+    <span class="section-label">Resultados reais</span>
+    <h2>O que dizem quem já transformou a alimentação</h2>
+    <div class="testi-grid">
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p>Finalmente um guia que explica tudo de forma clara! Já testei 5 receitas e ficaram deliciosas. O plano de 7 dias foi um divisor de águas na minha rotina.</p>
+        <div class="testi-author"><div class="testi-avatar">👩</div><div><div class="testi-name">Ana Paula S.</div><div class="testi-role">Professora, 34 anos</div></div></div>
+      </div>
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p>Nunca pensei que comer saudável pudesse ser tão gostoso. O mousse de chocolate com abacate virou minha sobremesa favorita. Recomendo demais!</p>
+        <div class="testi-author"><div class="testi-avatar">👨</div><div><div class="testi-name">Carlos M.</div><div class="testi-role">Engenheiro, 41 anos</div></div></div>
+      </div>
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p>A lista de compras semanal e o guia de meal prep mudaram minha vida. Não perco mais tempo pensando o que comer. Produto incrível, vale cada centavo!</p>
+        <div class="testi-author"><div class="testi-avatar">👩</div><div><div class="testi-name">Fernanda L.</div><div class="testi-role">Mãe e empreendedora</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PREÇO -->
+<section class="pricing" id="pricing">
+  <div class="container">
+    <span class="section-label" style="color:var(--gold-light)">Oferta especial de lançamento</span>
+    <h2>Invista na sua saúde hoje</h2>
+    <p class="lead">Acesso imediato e vitalício ao e-book completo com todos os bônus.</p>
+    <div class="price-card">
+      <p class="price-original">De R$ 97,00</p>
+      <div class="price-value"><sup>R$</sup>47<span>,00</span></div>
+      <p class="price-desc">Pagamento único · Acesso imediato · PDF para sempre</p>
+      <ul class="price-includes">
+        <li>E-book Sabores Leves (36 páginas)</li>
+        <li>50+ receitas com valor calórico</li>
+        <li>Plano alimentar completo de 7 dias</li>
+        <li>Lista de compras semanal</li>
+        <li>Guia de meal prep</li>
+        <li>Tabelas de nutrição completas</li>
+        <li>Bônus: Bebidas Funcionais</li>
+        <li>Bônus: Guia de Substituições</li>
+      </ul>
+      <a href="#" class="cta-btn">🛒 Quero acesso agora por R$47</a>
+      <p class="price-guarantee">🔒 Compra 100% segura · Garantia de 7 dias</p>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq">
+  <div class="container">
+    <span class="section-label">Dúvidas frequentes</span>
+    <h2>Perguntas Frequentes</h2>
+    <div class="faq-list">
+      <div class="faq-item"><div class="faq-q">Como vou receber o e-book?</div><div class="faq-a">Imediatamente após a confirmação do pagamento, você receberá um e-mail com o link para baixar o PDF. O acesso é vitalício — você pode baixar quantas vezes quiser.</div></div>
+      <div class="faq-item"><div class="faq-q">O e-book funciona em celular e computador?</div><div class="faq-a">Sim! O arquivo é em PDF e abre perfeitamente em qualquer dispositivo: celular, tablet ou computador. Você pode ler online ou salvar para ler offline.</div></div>
+      <div class="faq-item"><div class="faq-q">Preciso ser cozinheiro para fazer as receitas?</div><div class="faq-a">Não! Todas as receitas foram pensadas para pessoas comuns, sem técnicas avançadas. Se você sabe usar um liquidificador e uma frigideira, já dá pra fazer tudo.</div></div>
+      <div class="faq-item"><div class="faq-q">As receitas são para quem quer emagrecer?</div><div class="faq-a">O e-book serve para quem quer emagrecer, manter o peso ou simplesmente ter uma alimentação mais saudável. Todas as receitas têm informações calóricas para você adaptar ao seu objetivo.</div></div>
+      <div class="faq-item"><div class="faq-q">E se eu não gostar? Tem garantia?</div><div class="faq-a">Sim! Você tem 7 dias de garantia. Se por qualquer motivo não ficar satisfeito, basta entrar em contato que devolvemos 100% do seu dinheiro, sem perguntas.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CÓPIAS PRONTAS PARA USAR -->
+<section class="copy-section">
+  <div class="container">
+    <h2 style="font-family:'Playfair Display',serif; font-size:32px; margin-bottom:8px">📋 Descrições Prontas para Copiar</h2>
+    <p style="color:#888; margin-bottom:40px; font-size:14px">Cole diretamente na Hotmart, Kiwify, Instagram, WhatsApp ou onde quiser vender.</p>
+
+    <div class="copy-box">
+      <span class="copy-tag">HOTMART / KIWIFY</span>
+      <h3>📄 Descrição Curta (até 160 caracteres)</h3>
+      <p>Guia completo de alimentação saudável com 50+ receitas, plano de 7 dias, tabelas nutricionais e bônus. Emagreça com saúde e sem sofrimento! 🌿</p>
+    </div>
+
+    <div class="copy-box">
+      <span class="copy-tag">HOTMART / KIWIFY</span>
+      <h3>📄 Descrição Completa da Página de Vendas</h3>
+      <p>
+        <strong>Você já tentou de tudo para comer melhor e nada funcionou de verdade?</strong><br><br>
+        O Sabores Leves é o guia completo que vai transformar sua relação com a comida — de forma prática, saborosa e sem sofrimento.<br><br>
+        <strong>O que você vai receber:</strong><br>
+        ✅ 50+ receitas deliciosas com informações calóricas<br>
+        ✅ Plano alimentar completo de 7 dias<br>
+        ✅ Lista de compras semanal organizada<br>
+        ✅ Guia completo de nutrição (macros, vitaminas, minerais)<br>
+        ✅ Tabela de superalimentos e alimentos para evitar<br>
+        ✅ Guia de meal prep para preparar a semana inteira<br>
+        ✅ Bônus: Bebidas Funcionais e Detox<br>
+        ✅ Bônus: Guia de Substituições Inteligentes<br><br>
+        Tudo em um PDF bonito, completo e prático para consultar todos os dias.<br><br>
+        <strong>Garantia de 7 dias:</strong> Se você não ficar satisfeito, devolvemos 100% do seu dinheiro.
+      </p>
+    </div>
+
+    <div class="copy-box">
+      <span class="copy-tag">INSTAGRAM</span>
+      <h3>📱 Post para Feed</h3>
+      <p>
+        🥗 Você sabia que comer saudável pode ser simples, gostoso e sem culpa?<br><br>
+        Lançamos o <strong>Sabores Leves</strong> — o guia completo de alimentação saudável com:<br><br>
+        🌿 50+ receitas com calorias e valor nutricional<br>
+        📅 Plano alimentar de 7 dias pronto<br>
+        🛒 Lista de compras semanal<br>
+        💊 Guia completo de vitaminas e minerais<br>
+        🔄 12+ substituições inteligentes<br><br>
+        Do café da manhã à sobremesa, temos tudo para você transformar sua alimentação.<br><br>
+        👉 Link na bio para garantir o seu!<br><br>
+        #alimentacaosaudavel #emagrecer #receitassaudaveis #saude #nutricao #dietasaudavel #sabores leves #ebook
+      </p>
+    </div>
+
+    <div class="copy-box">
+      <span class="copy-tag">INSTAGRAM STORIES / REELS</span>
+      <h3>🎬 Roteiro de Stories (5 slides)</h3>
+      <p>
+        <strong>Slide 1:</strong> "Cansada de começar dieta na segunda e abandonar na quinta? 😩"<br><br>
+        <strong>Slide 2:</strong> "O problema não é você — é não ter o método certo! 💡"<br><br>
+        <strong>Slide 3:</strong> "Apresento o Sabores Leves 🌿 — guia completo com 50+ receitas, plano de 7 dias e tabelas nutricionais!"<br><br>
+        <strong>Slide 4:</strong> "Café da manhã ☀️ Almoço 🥗 Jantar 🌙 Lanche 🍎 Sobremesa 🍫 — tudo saudável e delicioso!"<br><br>
+        <strong>Slide 5:</strong> "Por apenas R$47 você transforma sua alimentação! 👉 Link na bio! 🛒"
+      </p>
+    </div>
+
+    <div class="copy-box">
+      <span class="copy-tag">WHATSAPP / GRUPOS</span>
+      <h3>💬 Mensagem de WhatsApp</h3>
+      <p>
+        Oi! Quero te apresentar o *Sabores Leves* 🌿<br><br>
+        É um e-book completo de alimentação saudável com:<br>
+        ✅ 50+ receitas com calorias (café, almoço, jantar, lanche e sobremesa)<br>
+        ✅ Plano alimentar de 7 dias pronto pra usar<br>
+        ✅ Lista de compras semanal<br>
+        ✅ Guia de nutrição com tabelas completas<br>
+        ✅ 2 bônus: Bebidas Detox + Substituições Inteligentes<br><br>
+        Tudo por apenas *R$47* com garantia de 7 dias!<br><br>
+        Acesse agora 👉 [SEU LINK AQUI]
+      </p>
+    </div>
+
+    <div class="copy-box">
+      <span class="copy-tag">TÍTULO / HEADLINE</span>
+      <h3>✍️ Opções de Títulos para Anúncios</h3>
+      <ul>
+        <li>"Emagreça sem passar fome: 50+ receitas saudáveis em um só guia"</li>
+        <li>"Chega de improvisar o que comer: tenha um plano completo de 7 dias"</li>
+        <li>"A alimentação que você sempre quis — prática, gostosa e sem culpa"</li>
+        <li>"Transforme sua dieta em 7 dias com este guia completo de nutrição"</li>
+        <li>"50+ receitas saudáveis + plano semanal + tabelas nutricionais: tudo em um PDF"</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 <strong>Sabores Leves</strong> · E-book Digital · Todos os direitos reservados</p>
+  <p style="margin-top:8px">Dúvidas? Entre em contato pelo e-mail do produto na plataforma de venda.</p>
+</footer>
+
+</body>
+</html>
